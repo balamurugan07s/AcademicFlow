@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional Developer & Academic Portfolio of Balamurugan S - Computer Science and Engineering student at SRM Institute of Science and Technology. Focused on distributed systems, full-stack architecture, and developer tooling.">
+  <meta name="keywords" content="Balamurugan S, SRM IST, Computer Science, Distributed Systems, Full Stack Developer, Software Engineer, Portfolio">
+  <meta name="author" content="Balamurugan S">
+  <title>Balamurugan S | Computer Science & Systems Developer</title>
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="container">
+      <a href="#hero" class="nav-brand" aria-label="Balamurugan S Portfolio Home">
+        <div class="brand-monogram">BS</div>
+        <div class="brand-info">
+          <span class="brand-name">Balamurugan S</span>
+          <span class="brand-affiliation">SRM IST • CSE '28</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#hero" class="nav-link">About</a></li>
+        <li><a href="#academic" class="nav-link">Academic</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#telemetry" class="nav-link">GitHub</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to Light Theme">
+          <i class="fa-regular fa-sun"></i>
+        </button>
+
+        <a href="https://github.com/balamurugan07s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Profile">
+          <i class="fa-brands fa-github"></i>
+          <span>GitHub</span>
+        </a>
+
+        <button type="button" class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <header class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-layout">
+        <div>
+          <div class="hero-status-pill">
+            <span class="pulse-dot"></span>
+            <span>Open to SWE Internships &amp; Research Co-ops</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="text-gradient" id="hero-name">Balamurugan S</span>
+          </h1>
+
+          <div class="hero-affiliation-badge">
+            <i class="fa-solid fa-building-columns"></i>
+            <span id="hero-institution-badge">SRM Institute of Science and Technology, Tiruchirappalli Campus</span>
+          </div>
+
+          <p class="hero-bio">
+            Systems-focused Computer Science &amp; Engineering undergraduate with practical expertise in building resilient distributed backends, developer engineering platforms, and low-latency cloud infrastructure. Passionate about verifiable engineering metrics, cryptographic webhooks, and concurrency primitives.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Explore Projects</span>
+            </a>
+            <a href="#academic" class="btn btn-secondary">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Academic Credentials</span>
+            </a>
+            <a href="https://github.com/balamurugan07s" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <i class="fa-brands fa-github"></i>
+              <span>GitHub Telemetry</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quantitative Engineering Metrics Counter Bar -->
+        <div class="metrics-counter-bar" id="hero-metrics-bar">
+          <!-- Dynamically populated from PROFILE_DATA.heroMetrics -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       OFFICIAL ACADEMIC CREDENTIALS CARD
+       ========================================================================== -->
+  <section class="section-academic" id="academic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Verified Institutional Record</span>
+        </div>
+        <h2 class="section-title">Official Academic Profile</h2>
+        <p class="section-subtitle">
+          Undergraduate engineering curriculum, verified student credentials, and specialized coursework at SRM Institute of Science and Technology.
+        </p>
+      </div>
+
+      <div class="academic-card">
+        <div class="academic-header-banner">
+          <div class="institution-spotlight">
+            <div class="institution-crest-icon">
+              <i class="fa-solid fa-university"></i>
+            </div>
+            <div>
+              <h3 class="institution-name">SRM Institute of Science and Technology</h3>
+              <p class="institution-department">Tiruchirappalli Campus • Department of Computing Technologies</p>
+            </div>
+          </div>
+          <div class="academic-verified-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Active Student Record</span>
+          </div>
+        </div>
+
+        <div class="academic-body">
+          <div class="credentials-grid">
+            <div class="credential-field">
+              <span class="credential-label">Candidate Name</span>
+              <span class="credential-value" id="acad-name">Balamurugan S</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Register Number</span>
+              <span class="credential-value font-mono" id="acad-reg">RA2411003050001</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Degree &amp; Program</span>
+              <span class="credential-value" id="acad-degree">B.Tech in Computer Science and Engineering</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Current Standing</span>
+              <span class="credential-value font-mono" id="acad-year">III Year / V Semester</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Academic Batch</span>
+              <span class="credential-value font-mono" id="acad-batch">2024 – 2028</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Cumulative CGPA</span>
+              <span class="credential-value font-mono" id="acad-cgpa" style="color: var(--color-cyan);">8.0 / 10.0</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Institutional Email</span>
+              <span class="credential-value font-mono" id="acad-email">balamurugan.s@srmist.edu.in</span>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">GitHub Handle</span>
+              <a href="https://github.com/balamurugan07s" target="_blank" rel="noopener noreferrer" class="credential-value font-mono" id="acad-gh" style="color: var(--color-accent);">@balamurugan07s</a>
+            </div>
+            <div class="credential-field">
+              <span class="credential-label">Campus Location</span>
+              <span class="credential-value" id="acad-campus">Tiruchirappalli Campus</span>
+            </div>
+          </div>
+
+          <h4 class="coursework-section-title">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>Core Curriculum &amp; Specialized Coursework</span>
+          </h4>
+          <div class="coursework-pills-wrap" id="coursework-pills-wrap">
+            <!-- Dynamically populated from PROFILE_DATA.coursework -->
+          </div>
+
+          <div class="academic-highlights-list" id="academic-highlights-wrap">
+            <!-- Dynamically populated from PROFILE_DATA.academicHighlights -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SKILLS MATRIX
+       ========================================================================== -->
+  <section class="section-skills" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-microchip"></i>
+          <span>Technical Competencies</span>
+        </div>
+        <h2 class="section-title">Skills &amp; Engineering Disciplines</h2>
+        <p class="section-subtitle">
+          Categorized technical stack focused on scalable software architecture, distributed engines, relational &amp; in-memory data, and automated DevOps.
+        </p>
+      </div>
+
+      <div class="skills-categories-grid" id="skills-container">
+        <!-- Dynamically populated from SKILLS_DATA -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECTS SHOWCASE (DYNAMIC & FILTERABLE)
+       ========================================================================== -->
+  <section class="section-projects" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-solid fa-code-branch"></i>
+          <span>Production Systems &amp; Labs</span>
+        </div>
+        <h2 class="section-title">Featured Engineering Projects</h2>
+        <p class="section-subtitle">
+          Data-driven showcase of distributed backends, developer infrastructure, and algorithmic pipelines with quantitative performance metrics.
+        </p>
+      </div>
+
+      <!-- Search & Filters Bar -->
+      <div class="projects-controls">
+        <div class="projects-search-bar">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="project-search" class="search-input" placeholder="Search projects by keyword, technology, or system concept (e.g., Redis, Raft, PostgreSQL, AI)..." aria-label="Search projects">
+          <button type="button" id="search-clear" class="search-clear-btn" aria-label="Clear search input">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="projects-filters-row">
+          <div class="filter-pills-group" role="tablist" aria-label="Filter projects by category">
+            <button type="button" class="filter-btn active" data-category="all" role="tab">All Systems</button>
+            <button type="button" class="filter-btn" data-category="systems" role="tab">Systems &amp; Distributed</button>
+            <button type="button" class="filter-btn" data-category="web" role="tab">Full-Stack Web</button>
+            <button type="button" class="filter-btn" data-category="ai" role="tab">AI &amp; Developer Tools</button>
+          </div>
+          <span class="projects-counter-badge" id="projects-counter">Showing 1 of 1 Project</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Projects Cards Grid -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Dynamically rendered by main.js from PROJECTS_DATA -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       LIVE GITHUB TELEMETRY CARD
+       ========================================================================== -->
+  <section class="section-github" id="telemetry">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">
+          <i class="fa-brands fa-github"></i>
+          <span>Real-Time Telemetry</span>
+        </div>
+        <h2 class="section-title">Live GitHub Activity</h2>
+        <p class="section-subtitle">
+          Real-time metrics fetched asynchronously from the GitHub REST API for developer handle <code>balamurugan07s</code>.
+        </p>
+      </div>
+
+      <div class="github-telemetry-card">
+        <div class="github-telemetry-header">
+          <div class="github-profile-identity">
+            <img src="https://avatars.githubusercontent.com/u/276487573?v=4" alt="Balamurugan S GitHub Avatar" class="github-avatar" id="gh-avatar">
+            <div class="github-id-info">
+              <span class="github-name" id="gh-name">Balamurugan S</span>
+              <a href="https://github.com/balamurugan07s" target="_blank" rel="noopener noreferrer" class="github-handle" id="gh-handle">@balamurugan07s</a>
+            </div>
+          </div>
+          <div class="github-telemetry-status">
+            <div class="telemetry-status-pill" id="gh-telemetry-status">
+              <span class="pulse-dot"></span>
+              <span>Fetching live sync...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="github-telemetry-body">
+          <div class="github-stats-summary-grid">
+            <div class="github-stat-box">
+              <div class="github-stat-num" id="gh-repos-count">-</div>
+              <div class="github-stat-title">Public Repositories</div>
+            </div>
+            <div class="github-stat-box">
+              <div class="github-stat-num" id="gh-followers">-</div>
+              <div class="github-stat-title">Followers</div>
+            </div>
+            <div class="github-stat-box">
+              <div class="github-stat-num" id="gh-following">-</div>
+              <div class="github-stat-title">Following</div>
+            </div>
+            <div class="github-stat-box">
+              <div class="github-stat-num" id="gh-created-year">2024</div>
+              <div class="github-stat-title">Member Since</div>
+            </div>
+          </div>
+
+          <div class="github-repos-header">
+            <span>Featured &amp; Active Repositories</span>
+            <a href="https://github.com/balamurugan07s?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+              <span>View All on GitHub</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <div class="github-repos-grid" id="gh-repos-container">
+            <!-- Dynamically populated by github-stats.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT / CONNECT SECTION
+       ========================================================================== -->
+  <section class="section-contact" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div class="contact-badge">
+          <i class="fa-regular fa-paper-plane"></i>
+          <span>Let's Build Together</span>
+        </div>
+        <h2 class="contact-title">Interested in Systems Collaboration?</h2>
+        <p class="contact-desc">
+          I am actively seeking Software Engineering internships, research opportunities, and distributed systems collaborations for upcoming terms.
+        </p>
+
+        <div class="contact-actions-wrap">
+          <a href="mailto:balamurugan.s@srmist.edu.in" class="btn btn-primary">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Send Email</span>
+          </a>
+
+          <button type="button" class="email-copy-badge" id="copy-email-btn" title="Copy institutional email to clipboard">
+            <i class="fa-regular fa-copy"></i>
+            <span>Copy: balamurugan.s@srmist.edu.in</span>
+          </button>
+
+          <a href="https://github.com/balamurugan07s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+          </a>
+
+          <a href="https://linkedin.com/in/balamurugan07s" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-credits">
+        <span class="footer-copy">© 2026 Balamurugan S. All rights reserved.</span>
+        <span class="footer-institution">SRM Institute of Science and Technology • Tiruchirappalli Campus</span>
+      </div>
+
+      <div class="footer-nav">
+        <a href="#hero" class="btn btn-outline btn-sm">
+          <span>Back to top</span>
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       INTERACTIVE DEEP-DIVE ARCHITECTURAL MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="project-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-container" role="document">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div class="modal-badges-row">
+            <span class="badge badge-accent" id="modal-badge-domain">Distributed Systems</span>
+            <span class="badge badge-status" id="modal-badge-status">Active Development</span>
+          </div>
+          <h2 class="modal-title" id="modal-title">Project Title</h2>
+          <p class="modal-subtitle" id="modal-subtitle">Project Subtitle</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close Project Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Overview -->
+        <div>
+          <h4 class="modal-section-title">
+            <i class="fa-solid fa-align-left"></i>
+            <span>Problem &amp; System Overview</span>
+          </h4>
+          <p class="modal-desc-box" id="modal-desc"></p>
+        </div>
+
+        <!-- Architecture -->
+        <div>
+          <h4 class="modal-section-title">
+            <i class="fa-solid fa-sitemap"></i>
+            <span>System Architecture &amp; Implementation Details</span>
+          </h4>
+          <div class="modal-architecture-box" id="modal-architecture"></div>
+        </div>
+
+        <!-- Key Technical Highlights -->
+        <div>
+          <h4 class="modal-section-title">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Key Technical Highlights &amp; Innovations</span>
+          </h4>
+          <div class="modal-highlights-list" id="modal-highlights-wrap"></div>
+        </div>
+
+        <!-- Quantitative Benchmarks & Metrics -->
+        <div>
+          <h4 class="modal-section-title">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Performance Benchmarks &amp; Telemetry</span>
+          </h4>
+          <div class="modal-metrics-grid" id="modal-metrics-wrap"></div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div>
+          <h4 class="modal-section-title">
+            <i class="fa-solid fa-code"></i>
+            <span>Technologies, Frameworks &amp; Protocols</span>
+          </h4>
+          <div class="project-card-stack" id="modal-stack-wrap"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="App.closeModal()">
+          <span>Close</span>
+        </button>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="modal-github-link">
+          <i class="fa-brands fa-github"></i>
+          <span>View Source Code</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="js/projects-data.js"></script>
+  <script src="js/github-stats.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

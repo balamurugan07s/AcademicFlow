@@ -1,0 +1,381 @@
+// Prisma Schema for EngineeringHub
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  DEVELOPER
+  VIEWER
+  SECURITY_ANALYST
+}
+
+enum RepoSyncStatus {
+  IDLE
+  SYNCING
+  SUCCESS
+  FAILED
+}
+
+enum PrState {
+  OPEN
+  CLOSED
+  MERGED
+}
+
+enum IssueState {
+  OPEN
+  CLOSED
+}
+
+enum PipelineStatus {
+  QUEUED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum PipelineConclusion {
+  SUCCESS
+  FAILURE
+  CANCELLED
+  SKIPPED
+  TIMED_OUT
+}
+
+enum DeploymentEnv {
+  DEVELOPMENT
+  STAGING
+  PRODUCTION
+}
+
+enum DeploymentStatus {
+  PENDING
+  RUNNING
+  SUCCESSFUL
+  FAILED
+  ROLLED_BACK
+}
+
+enum FindingSeverity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum FindingStatus {
+  OPEN
+  RESOLVED
+  DISMISSED
+}
+
+enum WebhookStatus {
+  PENDING
+  PROCESSING
+  PROCESSED
+  FAILED
+}
+
+model User {
+  id           String       @id @default(uuid())
+  email        String       @unique
+  name         String?
+  passwordHash String?      @map("password_hash")
+  avatarUrl    String?      @map("avatar_url")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  memberships  Membership[]
+  accounts     Account[]
+
+  @@map("users")
+}
+
+model Account {
+  id                     String    @id @default(uuid())
+  userId                 String    @map("user_id")
+  provider               String
+  providerAccountId      String    @map("provider_account_id")
+  accessTokenEncrypted   String?   @map("access_token_encrypted")
+  refreshTokenEncrypted  String?   @map("refresh_token_encrypted")
+  tokenExpiresAt         DateTime? @map("token_expires_at")
+  scope                  String?
+  createdAt              DateTime  @default(now()) @map("created_at")
+
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Organization {
+  id          String        @id @default(uuid())
+  name        String
+  slug        String        @unique
+  avatarUrl   String?       @map("avatar_url")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  memberships Membership[]
+  invitations Invitation[]
+  repositories Repository[]
+  auditLogs   AuditLog[]
+  webhookEvents WebhookEvent[]
+
+  @@map("organizations")
+}
+
+model Membership {
+  id             String       @id @default(uuid())
+  organizationId String       @map("organization_id")
+  userId         String       @map("user_id")
+  role           Role         @default(DEVELOPER)
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([organizationId, role])
+  @@map("memberships")
+}
+
+model Invitation {
+  id             String       @id @default(uuid())
+  organizationId String       @map("organization_id")
+  email          String
+  role           Role         @default(DEVELOPER)
+  tokenHash      String       @unique @map("token_hash")
+  expiresAt      DateTime     @map("expires_at")
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("invitations")
+}
+
+model Repository {
+  id             String         @id @default(uuid())
+  organizationId String         @map("organization_id")
+  githubRepoId   String         @map("github_repo_id")
+  name           String
+  fullName       String         @map("full_name")
+  ownerLogin     String         @map("owner_login")
+  description    String?
+  defaultBranch  String         @default("main") @map("default_branch")
+  isPrivate      Boolean        @default(true) @map("is_private")
+  htmlUrl        String         @map("html_url")
+  syncStatus     RepoSyncStatus @default(IDLE) @map("sync_status")
+  lastSyncedAt   DateTime?      @map("last_synced_at")
+  createdAt      DateTime       @default(now()) @map("created_at")
+
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  commits        Commit[]
+  pullRequests   PullRequest[]
+  issues         Issue[]
+  releases       Release[]
+  pipelineRuns   PipelineRun[]
+  deployments    Deployment[]
+  securityFindings SecurityFinding[]
+
+  @@unique([organizationId, githubRepoId])
+  @@index([organizationId, syncStatus])
+  @@map("repositories")
+}
+
+model Commit {
+  id              String      @id @default(uuid())
+  repositoryId    String      @map("repository_id")
+  organizationId  String      @map("organization_id")
+  sha             String
+  message         String
+  authorName      String      @map("author_name")
+  authorEmail     String      @map("author_email")
+  authorAvatarUrl String?     @map("author_avatar_url")
+  authoredAt      DateTime    @map("authored_at")
+  branch          String?
+  additions       Int         @default(0)
+  deletions       Int         @default(0)
+  filesChanged    Int         @default(0) @map("files_changed")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  repository      Repository  @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, sha])
+  @@index([organizationId, authoredAt(sort: Desc)])
+  @@index([repositoryId, authoredAt(sort: Desc)])
+  @@map("commits")
+}
+
+model PullRequest {
+  id              String      @id @default(uuid())
+  repositoryId    String      @map("repository_id")
+  organizationId  String      @map("organization_id")
+  githubPrId      String      @map("github_pr_id")
+  number          Int
+  title           String
+  state           PrState
+  authorLogin     String      @map("author_login")
+  authorAvatarUrl String?     @map("author_avatar_url")
+  sourceBranch    String      @map("source_branch")
+  targetBranch    String      @map("target_branch")
+  additions       Int         @default(0)
+  deletions       Int         @default(0)
+  changedFiles    Int         @default(0) @map("changed_files")
+  firstReviewAt   DateTime?   @map("first_review_at")
+  prCreatedAt     DateTime    @map("pr_created_at")
+  mergedAt        DateTime?   @map("merged_at")
+  closedAt        DateTime?   @map("closed_at")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  repository      Repository  @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, number])
+  @@index([organizationId, state, prCreatedAt(sort: Desc)])
+  @@map("pull_requests")
+}
+
+model Issue {
+  id              String      @id @default(uuid())
+  repositoryId    String      @map("repository_id")
+  organizationId  String      @map("organization_id")
+  githubIssueId   String      @map("github_issue_id")
+  number          Int
+  title           String
+  state           IssueState
+  authorLogin     String      @map("author_login")
+  assigneeLogin   String?     @map("assignee_login")
+  labels          String      @default("[]") // JSON serialized string of label names
+  issueCreatedAt  DateTime    @map("issue_created_at")
+  closedAt        DateTime?   @map("closed_at")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  repository      Repository  @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, number])
+  @@index([organizationId, state, issueCreatedAt(sort: Desc)])
+  @@map("issues")
+}
+
+model Release {
+  id              String      @id @default(uuid())
+  repositoryId    String      @map("repository_id")
+  organizationId  String      @map("organization_id")
+  githubReleaseId String      @map("github_release_id")
+  tagName         String      @map("tag_name")
+  name            String?
+  authorLogin     String      @map("author_login")
+  publishedAt     DateTime    @map("published_at")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  repository      Repository  @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, tagName])
+  @@map("releases")
+}
+
+model PipelineRun {
+  id              String              @id @default(uuid())
+  repositoryId    String              @map("repository_id")
+  organizationId  String              @map("organization_id")
+  githubRunId     String              @map("github_run_id")
+  workflowName    String              @map("workflow_name")
+  event           String
+  status          PipelineStatus
+  conclusion      PipelineConclusion?
+  commitSha       String              @map("commit_sha")
+  branch          String
+  durationMs      Int?                @map("duration_ms")
+  startedAt       DateTime            @map("started_at")
+  completedAt     DateTime?           @map("completed_at")
+  createdAt       DateTime            @default(now()) @map("created_at")
+
+  repository      Repository          @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, githubRunId])
+  @@index([organizationId, conclusion, startedAt(sort: Desc)])
+  @@map("pipeline_runs")
+}
+
+model Deployment {
+  id              String           @id @default(uuid())
+  repositoryId    String           @map("repository_id")
+  organizationId  String           @map("organization_id")
+  environment     DeploymentEnv
+  version         String
+  commitSha       String           @map("commit_sha")
+  status          DeploymentStatus
+  durationMs      Int?             @map("duration_ms")
+  deployedBy      String           @map("deployed_by")
+  deployedAt      DateTime         @default(now()) @map("deployed_at")
+  createdAt       DateTime         @default(now()) @map("created_at")
+
+  repository      Repository       @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, environment, deployedAt(sort: Desc)])
+  @@map("deployments")
+}
+
+model SecurityFinding {
+  id                String          @id @default(uuid())
+  repositoryId      String          @map("repository_id")
+  organizationId    String          @map("organization_id")
+  severity          FindingSeverity
+  title             String
+  description       String
+  packageName       String?         @map("package_name")
+  vulnerableVersion String?         @map("vulnerable_version")
+  patchedVersion    String?         @map("patched_version")
+  detectionSource   String          @default("dependabot") @map("detection_source")
+  status            FindingStatus   @default(OPEN)
+  createdAt         DateTime        @default(now()) @map("created_at")
+
+  repository        Repository      @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, severity, status])
+  @@map("security_findings")
+}
+
+model WebhookEvent {
+  id                 String        @id @default(uuid())
+  deliveryId         String        @unique @map("delivery_id")
+  organizationId     String?       @map("organization_id")
+  eventType          String        @map("event_type")
+  payload            String        // Raw JSON text payload
+  signatureVerified  Boolean       @map("signature_verified")
+  processingStatus   WebhookStatus @default(PENDING) @map("processing_status")
+  errorMessage       String?       @map("error_message")
+  receivedAt         DateTime      @default(now()) @map("received_at")
+
+  organization       Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  @@index([deliveryId])
+  @@index([processingStatus, receivedAt])
+  @@map("webhook_events")
+}
+
+model AuditLog {
+  id             String       @id @default(uuid())
+  organizationId String       @map("organization_id")
+  actorId        String?      @map("actor_id")
+  actorEmail     String       @map("actor_email")
+  action         String
+  resourceType   String       @map("resource_type")
+  resourceId     String       @map("resource_id")
+  metadata       String       @default("{}") // JSON string metadata
+  ipAddress      String?      @map("ip_address")
+  userAgent      String?      @map("user_agent")
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, createdAt(sort: Desc)])
+  @@map("audit_logs")
+}
