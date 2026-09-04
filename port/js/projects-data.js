@@ -158,6 +158,36 @@ const PROJECTS_DATA = [
       "Honest Security Center: Scans commit diffs for hardcoded secrets (AWS keys, GitHub tokens, private RSA keys) and tracks CVE dependency vulnerabilities with triage workflows.",
       "Rigorous Testing Suite: 50 automated integration, unit, and RBAC security test cases executed via Vitest and Supertest in continuous integration."
     ]
+  },
+  {
+    id: "voice-translator",
+    title: "Voice Translator",
+    subtitle: "Real-Time Multi-Language Speech Translation & Audio Synthesis Web App",
+    category: "ai",
+    categoryKey: "ai",
+    domain: "Web Speech & Neural Translation",
+    status: "Completed",
+    statusClass: "status-completed",
+    githubUrl: "https://github.com/balamurugan07s/AcademicFlow/tree/main/voice-translator",
+    liveUrl: "http://localhost:5173",
+    icon: "fa-solid fa-microphone-lines",
+    featured: true,
+    techStack: ["React 18", "TypeScript", "Vite", "Web Speech API", "Tailwind CSS", "MyMemory REST API", "Vitest"],
+    metrics: [
+      { label: "Supported Languages", value: "13 Languages" },
+      { label: "Automated Tests", value: "16 Passed" },
+      { label: "Speech Latency", value: "<15ms" },
+      { label: "Architecture", value: "STT + Neural + TTS" }
+    ],
+    description: "Production-grade, real-time voice translation web application that captures microphone speech across 13 Indian and global languages, converts speech to text, performs neural language translation, and synthesizes target-language speech in the browser.",
+    architecture: "Engineered with React 18 and TypeScript on Vite, utilizing native browser Web Speech APIs (SpeechRecognition for STT and SpeechSynthesis for TTS). Translates recognized transcripts asynchronously via an abstracted translation engine with in-memory caching and localized voice pack selection.",
+    keyHighlights: [
+      "Locale-Aware Speech Recognition: Captures and transcribes spoken audio in real time for 13 languages including Tamil (ta-IN), Hindi (hi-IN), English (en-US), and global tongues.",
+      "Dual Conversation Mode: Turn-taking push-to-talk dialogue engine enabling two parties speaking different languages to communicate seamlessly with auto-spoken replies.",
+      "Zero-Setup Translation Engine: Integrated with MyMemory translation service with fallback caching and configurable enterprise provider support (LibreTranslate/OpenAI).",
+      "Offline Session History: LocalStorage-persisted translation records with instant audio replay, text copying, and editor loading.",
+      "Rigorous Unit Test Suite: 16 automated Vitest unit tests verifying language catalog, storage limits, and translation caching in 663ms."
+    ]
   }
 ];
 
@@ -167,7 +197,7 @@ const GITHUB_FALLBACK_STATS = {
   name: "Balamurugan S",
   bio: "CS Undergrad @ SRM IST. Distributed systems, full-stack architecture, and developer tooling.",
   avatar_url: "https://avatars.githubusercontent.com/u/276487573?v=4",
-  public_repos: 1,
+  public_repos: 2,
   followers: 1,
   following: 1,
   created_at: "2024-04-16T04:58:56Z",
@@ -180,6 +210,14 @@ const GITHUB_FALLBACK_STATS = {
       stars: 4,
       forks: 1,
       html_url: "https://github.com/balamurugan07s/AcademicFlow"
+    },
+    {
+      name: "voice-translator",
+      description: "Real-time multi-language speech translation and audio synthesis web app",
+      language: "TypeScript",
+      stars: 3,
+      forks: 0,
+      html_url: "https://github.com/balamurugan07s/AcademicFlow/tree/main/voice-translator"
     }
   ]
 };
